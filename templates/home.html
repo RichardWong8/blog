@@ -2,6 +2,6 @@
 {% block title %} Welcome! {% endblock %}
 {% block header %} WELCOME TO THE BLOG! {% endblock %}
 {% block content %}
-    <a href= {{url_for("register")}}>REGISTER</a><br>
-    <a href= {{url_for("login")}}>LOGIN</a>
+    <a href= "{{url_for('register')}}">REGISTER</a><br>
+    <a href= "{{url_for('login')}}">LOGIN</a>
 {% endblock %}

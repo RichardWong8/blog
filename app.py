@@ -4,8 +4,11 @@ import os
 
 app = Flask(__name__)
 
+# AUTHENTICATION
 @app.route("/")
 def home():
+    if "username" in session:
+        return redirect(url_for('blog'))
     return render_template("home.html")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -44,15 +47,23 @@ def login_auth():
             flash("INCORRECT USERNAME OR PASSWORD")
     return redirect(url_for("login"))
 
-@app.route("/blog")
-def blog():
-    return
-
 @app.route("/logout")
 def logout():
     if "username" in session:
         session.pop("username")
     return redirect(url_for("home"))
+
+# BLOG RELATED
+@app.route("/blog")
+def blog():
+    if not("username" in session):
+        return redirect(url_for("login"))
+    return render_template("blog.html")
+
+@app.route("/blog/create")
+def create_blog():
+    return render_template("create_blog.html")
+
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(32)
