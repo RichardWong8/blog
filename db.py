@@ -99,3 +99,7 @@ def change_entry(user_id, blog_id, entry_id, entry_title, entry_data):
 add_user("johnjacobsmith", "donkeyhorsecow")
 print(get_user_id("johnjacobsmith"))
 print(get_user_id("joejacobsmith"))
+
+print(authenticate_user("johnjacobsmith", "honk"))
+print(authenticate_user("joe", "honk"))
+print(authenticate_user("johnjacobsmith", "donkeyhorsecow"))

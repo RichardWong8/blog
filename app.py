@@ -15,9 +15,9 @@ def register():
 @app.route("/register/auth", methods=["POST"])
 def register_auth():
     if request.method == "POST":
-        username = request.form.username
-        password = request.form.password
-        confirm = request.form.confirm
+        username = request.form["username"]
+        password = request.form["password"]
+        confirm = request.form["confirm"]
         if get_user_id(username) == -1:
             if password == confirm:
                 add_user(username, password)
@@ -36,8 +36,8 @@ def login():
 @app.route("/login/auth", methods=["POST"])
 def login_auth():
     if request.method == "POST":
-        username = request.form.username
-        password = request.form.password
+        username = request.form["username"]
+        password = request.form["password"]
         if authenticate_user(username, password):
             return redirect(url_for("blog"))
         else:
