@@ -8,12 +8,23 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
     return render_template("register.html")
 
-@app.route("/register/auth")
+@app.route("/register/auth", methods=["POST"])
 def register_auth():
+    if request.method == "POST":
+        username = request.form.username
+        password = request.form.password
+        confirm = request.form.confirm
+        if get_user_id(username) == -1:
+            if password == confirm:
+                add_user(username, password)
+            else:
+                flash("PASSWORDS DO NOT MATCH")
+        else:
+            flash("USERNAME TAKEN")
     return
 
 @app.route("/login")
