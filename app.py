@@ -38,6 +38,7 @@ def login_auth():
         username = request.form["username"]
         password = request.form["password"]
         if authenticate_user(username, password):
+            session["username"] = username
             return redirect(url_for("blog"))
         else:
             flash("INCORRECT USERNAME OR PASSWORD")
@@ -49,7 +50,9 @@ def blog():
 
 @app.route("/logout")
 def logout():
-    return
+    if "username" in session:
+        session.pop("username")
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(32)
