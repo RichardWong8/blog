@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> Welcome! </title>
-  </head>
-  <body>
-    <h1> WELCOME TO THE BLOG! </h1>
+{% extends "base.html" %}
+{% block title %} Welcome! {% endblock %}
+{% block header %} WELCOME TO THE BLOG! {% endblock %}
+{% block content %}
     <a href= {{url_for("register")}}>REGISTER</a><br>
     <a href= {{url_for("login")}}>LOGIN</a>
-  </body>
-</html>
+{% endblock %}

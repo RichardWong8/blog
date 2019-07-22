@@ -22,7 +22,6 @@ def register_auth():
             if password == confirm:
                 add_user(username, password)
                 flash("ACCOUNT SUCCESSFULLY CREATED")
-                return redirect(url_for("login"))
             else:
                 flash("PASSWORDS DO NOT MATCH")
         else:
