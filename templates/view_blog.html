@@ -3,6 +3,10 @@
 {% block header %} {{ blog_title }} {% endblock %}
 
 {% block content %}
-  {% for entry_info in entries_list %}
+  <a class="waves-effect waves-light btn" href="{{url_for('create_entry')}}">CREATE ENTRY</a>
+  <div class="collection">
+  {% for entry_data in entries_list %}
+    <a class="collection-item" href="{{ url_for('view_entry', user_id=entry_data[0], blog_id=entry_data[1], entry_id=entry_data[2])}}">{{ entry_data[3] }}</a>
   {% endfor %}
+  </div>
 {% endblock %}

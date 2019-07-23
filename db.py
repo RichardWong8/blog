@@ -9,7 +9,7 @@ c = db.cursor()
 tables = {
     "users":   "user_id INTEGER, username TEXT, password TEXT",
     "blogs":   "user_id INTEGER, blog_id INTEGER, blog_title TEXT",
-    "entries": "user_id INTEGER, blog_id INTEGER, entry_id INTEGER, entry_title TEXT, entry_data TEXT"
+    "entries": "user_id INTEGER, blog_id INTEGER, entry_id INTEGER, entry_title TEXT, entry_content TEXT"
 }
 
 def open_db():
@@ -42,7 +42,7 @@ def add_user(username, password):
     select = "SELECT username FROM users"
     c.execute(select)
     users = c.fetchall()
-    user_id = len(users)
+    user_id = len(users) + 1
 
     values = (user_id, username, password)
     insert = "INSERT INTO users VALUES (?, ?, ?)"
@@ -85,7 +85,7 @@ def add_blog(user_id, blog_title):
     open_db()
 
     blogs = get_blogs(user_id)
-    blog_id = len(blogs)
+    blog_id = len(blogs) + 1
 
     values = (user_id, blog_id, blog_title)
     insert = "INSERT INTO blogs VALUES (?, ?, ?)"
@@ -109,18 +109,18 @@ def get_blogs(user_id):
 
 def get_blog_title(user_id, blog_id):
     open_db()
-    
+
     select = "SELECT blog_title FROM blogs WHERE user_id=" + str(user_id) + " AND blog_id=" + str(blog_id)
     c.execute(select)
     blogs = c.fetchall()
     blog = blogs[0][0]
-    
+
     return blog
 
 def get_entries(user_id, blog_id):
     open_db()
 
-    select = "SELECT entry_id, entry_title, entry_data FROM entries WHERE user_id=" + str(user_id) + " AND blog_id =" + str(blog_id)
+    select = "SELECT user_id, blog_id, entry_id, entry_title, entry_content FROM entries WHERE user_id=" + str(user_id) + " AND blog_id =" + str(blog_id)
     c.execute(select)
     entries = c.fetchall()
 
@@ -128,11 +128,20 @@ def get_entries(user_id, blog_id):
 
 
 # ENTRY
-def add_entry(user_id, blog_id, entry_id, entry_title, entry_data):
+def add_entry(user_id, blog_id, entry_title, entry_content):
     open_db()
-    save()
 
-def change_entry(user_id, blog_id, entry_id, entry_title, entry_data):
+    entries = get_entries(user_id, blog_id)
+    entry_id = len(entries) + 1
+
+    values = (user_id, blog_id, entry_id, entry_title, entry_content)
+    insert = "INSERT INTO entries VALUES (?, ?, ?, ?, ?)"
+    c.execute(insert, values)
+
+    save()
+    return entry_id
+
+def change_entry(user_id, blog_id, entry_id, entry_title, entry_content):
     open_db()
     save()
 

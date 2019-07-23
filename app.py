@@ -91,9 +91,23 @@ def view_blog():
     blog_id = request.args["blog_id"]
     blog_title = get_blog_title(user_id, blog_id)
 
+    session["blog_id"] = blog_id
+    session["blog_title"] = blog_title
+
     entries_list = get_entries(user_id, blog_id)
 
     return render_template("view_blog.html", blog_title=blog_title, entries_list=entries_list)
+@app.route("/entry/create")
+def create_entry():
+    if not(session["username"] and session["blog_id"]):
+        return redirect(url_for("blog"))
+    blog_id = session["blog_id"]
+    blog_title = session["blog_title"]
+    return render_template("create_entry.html", blog_id=blog_id, blog_title=blog_title)
+
+@app.route("/entry/create/confirm", methods=["POST"])
+def create_entry_confirm():
+    return ""
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(32)
