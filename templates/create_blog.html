@@ -1,0 +1,10 @@
+{% extends "blog.html" %}
+{% block title %} Create Blog {% endblock %}
+{% block header %} CREATE BLOG {% endblock %}
+
+{% block content %}
+  <form method="post" action="/blog/create/confirm">
+    <input type="text" name="blog_title" placeholder="blog title"><br>
+    <input type="submit" name="create">
+  </form>
+{% endblock %}

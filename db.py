@@ -90,6 +90,7 @@ def add_blog(user_id, blog_title):
     c.execute(insert, values)
 
     save()
+    return blog_id
 
 def change_blog_title(user_id, blog_id, blog_title):
     open_db()

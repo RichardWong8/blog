@@ -68,6 +68,15 @@ def blog():
 def create_blog():
     return render_template("create_blog.html")
 
+@app.route("/blog/create/confirm", methods=["POST"])
+def create_blog_confirm():
+    if request.method == "POST":
+        user_id = get_user_id(session["username"])
+        blog_title = request.form["blog_title"]
+        blog_id = add_blog(user_id, blog_title)
+        return redirect(url_for("view_blog", user_id=user_id, blog_id=blog_id))
+    return redirect(url_for("create_blog"))
+
 @app.route("/blog/view", methods=["GET"])
 def view_blog():
     user_id = request.args["user_id"]
