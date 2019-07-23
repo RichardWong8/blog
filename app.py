@@ -4,6 +4,8 @@ import os
 
 app = Flask(__name__)
 
+app.secret_key = os.urandom(32)
+
 # AUTHENTICATION
 @app.route("/")
 def home():
@@ -78,7 +80,7 @@ def create_blog_confirm():
         user_id = get_user_id(session["username"])
         blog_title = request.form["blog_title"]
         blog_id = add_blog(user_id, blog_title)
-        return redirect(url_for("view_blog", user_id=user_id, blog_id=blog_id, blog_title=blog_title))
+        return redirect(url_for("view_blog", user_id=user_id, blog_id=blog_id))
     return redirect(url_for("create_blog"))
 
 @app.route("/blog/view", methods=["GET"])

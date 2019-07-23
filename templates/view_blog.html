@@ -2,8 +2,13 @@
 {% block title %} {{ blog_title }} {% endblock %}
 {% block header %} {{ blog_title }} {% endblock %}
 
+{% block navigation %}
+  <a href="{{url_for('blog')}}"> HOME&nbsp</a>
+  <a href="{{url_for('create_blog')}}">CREATE BLOG&nbsp</a>
+  <a href="{{url_for('logout')}}"> LOGOUT</a>
+{% endblock %}
+
 {% block content %}
   {% for entry_info in entries_list %}
-
   {% endfor %}
 {% endblock %}

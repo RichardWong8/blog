@@ -48,6 +48,8 @@ def add_user(username, password):
     insert = "INSERT INTO users VALUES (?, ?, ?)"
     c.execute(insert, values)
 
+    print("USER_ID: " + str(user_id))
+
     save()
 
 def change_password(username, password):
