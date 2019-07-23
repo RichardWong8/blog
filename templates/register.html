@@ -3,8 +3,14 @@
 {% block header %} REGISTER {% endblock %}
 
 {% block navigation %}
-  <a href="{{url_for('home')}}"> HOME&nbsp</a>
-  <a href="{{url_for('login')}}"> LOGIN </a>
+  <nav>
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="{{url_for('home')}}"> HOME</a></li>
+        <li><a href="{{url_for('login')}}"> LOGIN </a></li>
+      </ul>
+    </div>
+  </nav>
 {% endblock %}
 
 {% block content %}
@@ -17,6 +23,6 @@
       <input type="text" name="username" placeholder="username"><br>
       <input type="password" name="password" placeholder="password"><br>
       <input type="password" name="confirm" placeholder="confirm password"><br>
-      <input type="submit" name="register">
+      <input class="waves-effect waves-light btn" type="submit" name="register">
     </form>
 {% endblock %}

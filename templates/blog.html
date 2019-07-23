@@ -3,13 +3,23 @@
 {% block header %} MY BLOGS {% endblock %}
 
 {% block navigation %}
-  <a href="{{url_for('blog')}}"> HOME&nbsp</a>
-  <a href="{{url_for('create_blog')}}">CREATE BLOG&nbsp</a>
-  <a href="{{url_for('logout')}}"> LOGOUT</a>
+  <nav>
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="{{url_for('blog')}}"> HOME</a></li>
+        <li><a href="{{url_for('create_blog')}}">CREATE BLOG</a></li>
+      </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+         <li><a href="{{url_for('logout')}}"> LOGOUT</a></li>
+      </ul>
+    </div>
+  </nav>
 {% endblock %}
 
 {% block content %}
+  <div class="collection">
   {% for blog_data in blog_list %}
-    <a href="{{ url_for('view_blog', user_id=blog_data[0], blog_id=blog_data[1])}}">{{ blog_data[2] }}</a><br>
+    <a class="collection-item" href="{{ url_for('view_blog', user_id=blog_data[0], blog_id=blog_data[1])}}">{{ blog_data[2] }}</a>
   {% endfor %}
+  </div>
 {% endblock %}

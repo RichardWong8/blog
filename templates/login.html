@@ -3,8 +3,14 @@
 {% block header %} LOGIN {% endblock %}
 
 {% block navigation %}
-  <a href="{{url_for('home')}}"> HOME&nbsp</a>
-  <a href="{{url_for('register')}}"> REGISTER </a>
+  <nav>
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="{{url_for('home')}}"> HOME</a></li>
+        <li><a href="{{url_for('register')}}"> REGISTER</a></li>
+      </ul>
+    </div>
+  </nav>
 {% endblock %}
 
 {% block content %}

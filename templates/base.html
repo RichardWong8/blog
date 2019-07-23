@@ -2,10 +2,12 @@
 <html>
   <head>
     <title> {% block title %}{% endblock %} </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
   </head>
   <body>
     {% block navigation %}{% endblock %}
-    <h1> {% block header %}{% endblock %} </h1>
+    <span class="my-header card-title"> {% block header %}{% endblock %} </span><br>
     {% block content %}{% endblock %}
   </body>
 </html>
