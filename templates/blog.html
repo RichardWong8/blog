@@ -4,12 +4,12 @@
 
 {% block navigation %}
   <a href="{{url_for('blog')}}"> HOME&nbsp</a>
+  <a href="{{url_for('create_blog')}}">CREATE BLOG&nbsp</a>
   <a href="{{url_for('logout')}}"> LOGOUT</a>
 {% endblock %}
 
 {% block content %}
-  <a href="{{url_for('create_blog')}}">CREATE BLOG</a>
-  {% for blog_data in blogs %}
-    <a href="{{url_for('blog/' + blog_data['blog_id'])}}">{{ blog_data['blog_title'] }}</a>
+  {% for blog_data in blog_list %}
+    <a href="{{ url_for('view_blog', user_id=blog_data[0], blog_id=blog_data[1] )}}">{{ blog_data[2] }}</a><br>
   {% endfor %}
 {% endblock %}

@@ -81,11 +81,38 @@ def authenticate_user(username, password):
 # BLOG
 def add_blog(user_id, blog_title):
     open_db()
+
+    blogs = get_blogs(user_id)
+    blog_id = len(blogs)
+
+    values = (user_id, blog_id, blog_title)
+    insert = "INSERT INTO blogs VALUES (?, ?, ?)"
+    c.execute(insert, values)
+
     save()
 
 def change_blog_title(user_id, blog_id, blog_title):
     open_db()
     save()
+
+def get_blogs(user_id):
+    open_db()
+
+    select = "SELECT user_id, blog_id, blog_title FROM blogs WHERE user_id=" + str(user_id)
+    c.execute(select)
+    blogs = c.fetchall()
+
+    return blogs
+
+def get_entries(user_id, blog_id):
+    open_db()
+
+    select = "SELECT entry_id, entry_title, entry_data FROM entries WHERE user_id=" + str(user_id) + " AND blog_id =" + str(blog_id)
+    c.execute(select)
+    entries = c.fetchall()
+
+    return entries
+
 
 # ENTRY
 def add_entry(user_id, blog_id, entry_id, entry_title, entry_data):
@@ -95,11 +122,13 @@ def add_entry(user_id, blog_id, entry_id, entry_title, entry_data):
 def change_entry(user_id, blog_id, entry_id, entry_title, entry_data):
     open_db()
     save()
-
-add_user("johnjacobsmith", "donkeyhorsecow")
+'''
+add_user("johnjacobsmith", "p")
+add_blog(1, "first blog ever")
 print(get_user_id("johnjacobsmith"))
 print(get_user_id("joejacobsmith"))
 
 print(authenticate_user("johnjacobsmith", "honk"))
 print(authenticate_user("joe", "honk"))
 print(authenticate_user("johnjacobsmith", "donkeyhorsecow"))
+'''

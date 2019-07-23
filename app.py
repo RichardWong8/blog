@@ -9,6 +9,7 @@ app = Flask(__name__)
 def home():
     if "username" in session:
         return redirect(url_for('blog'))
+
     return render_template("home.html")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -47,23 +48,34 @@ def login_auth():
             flash("INCORRECT USERNAME OR PASSWORD")
     return redirect(url_for("login"))
 
-@app.route("/logout")
+@app.route("/logout", methods=["GET"])
 def logout():
     if "username" in session:
         session.pop("username")
     return redirect(url_for("home"))
 
 # BLOG RELATED
-@app.route("/blog")
+@app.route("/blog", methods=["GET"])
 def blog():
     if not("username" in session):
         return redirect(url_for("login"))
-    return render_template("blog.html")
 
-@app.route("/blog/create")
+    blog_list = get_blogs(get_user_id(session["username"]))
+
+    return render_template("blog.html", blog_list=blog_list)
+
+@app.route("/blog/create", methods=["GET"])
 def create_blog():
     return render_template("create_blog.html")
 
+@app.route("/blog/view", methods=["GET"])
+def view_blog():
+    user_id = request.args["user_id"]
+    blog_id = request.args["blog_id"]
+
+    entries_list = get_entries(user_id, blog_id)
+
+    return render_template("view_blog.html")
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(32)
