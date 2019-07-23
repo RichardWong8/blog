@@ -42,7 +42,7 @@ def add_user(username, password):
     select = "SELECT username FROM users"
     c.execute(select)
     users = c.fetchall()
-    user_id = len(users) + 1
+    user_id = len(users)
 
     values = (user_id, username, password)
     insert = "INSERT INTO users VALUES (?, ?, ?)"
@@ -105,6 +105,16 @@ def get_blogs(user_id):
 
     return blogs
 
+def get_blog_title(user_id, blog_id):
+    open_db()
+    
+    select = "SELECT blog_title FROM blogs WHERE user_id=" + str(user_id) + " AND blog_id=" + str(blog_id)
+    c.execute(select)
+    blogs = c.fetchall()
+    blog = blogs[0][0]
+    
+    return blog
+
 def get_entries(user_id, blog_id):
     open_db()
 
@@ -123,9 +133,10 @@ def add_entry(user_id, blog_id, entry_id, entry_title, entry_data):
 def change_entry(user_id, blog_id, entry_id, entry_title, entry_data):
     open_db()
     save()
-'''
+
 add_user("johnjacobsmith", "p")
-add_blog(1, "first blog ever")
+add_blog(0, "first blog ever")
+'''
 print(get_user_id("johnjacobsmith"))
 print(get_user_id("joejacobsmith"))
 

@@ -10,6 +10,6 @@
 
 {% block content %}
   {% for blog_data in blog_list %}
-    <a href="{{ url_for('view_blog', user_id=blog_data[0], blog_id=blog_data[1], blog_title=blog_data[2] )}}">{{ blog_data[2] }}</a><br>
+    <a href="{{ url_for('view_blog', user_id=blog_data[0], blog_id=blog_data[1])}}">{{ blog_data[2] }}</a><br>
   {% endfor %}
 {% endblock %}

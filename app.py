@@ -66,10 +66,14 @@ def blog():
 
 @app.route("/blog/create", methods=["GET"])
 def create_blog():
+    if not("username" in session):
+        return redirect(url_for("login"))
     return render_template("create_blog.html")
 
 @app.route("/blog/create/confirm", methods=["POST"])
 def create_blog_confirm():
+    if not("username" in session):
+        return redirect(url_for("login"))
     if request.method == "POST":
         user_id = get_user_id(session["username"])
         blog_title = request.form["blog_title"]
@@ -79,11 +83,11 @@ def create_blog_confirm():
 
 @app.route("/blog/view", methods=["GET"])
 def view_blog():
+    if not("username" in session):
+        return redirect(url_for("login"))
     user_id = request.args["user_id"]
     blog_id = request.args["blog_id"]
-    blog_title = request.args["blog_title"]
-    # should write a function to retrieve title from id, more secure or
-    # find a way to use POST request
+    blog_title = get_blog_title(user_id, blog_id)
 
     entries_list = get_entries(user_id, blog_id)
 
