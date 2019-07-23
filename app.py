@@ -21,11 +21,13 @@ def register_auth():
         if get_user_id(username) == -1:
             if password == confirm:
                 add_user(username, password)
+                flash("ACCOUNT SUCCESSFULLY CREATED")
+                return redirect(url_for("login"))
             else:
                 flash("PASSWORDS DO NOT MATCH")
         else:
             flash("USERNAME TAKEN")
-    return
+    return redirect(url_for("register"))
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -33,6 +35,17 @@ def login():
 
 @app.route("/login/auth", methods=["POST"])
 def login_auth():
+    if request.method == "POST":
+        username = request.form.username
+        password = request.form.password
+        if authenticate_user(username, password):
+            return redirect(url_for("blog"))
+        else:
+            flash("INCORRECT USERNAME OR PASSWORD")
+    return redirect(url_for("login"))
+
+@app.route("/blog")
+def blog():
     return
 
 @app.route("/logout")

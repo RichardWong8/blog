@@ -66,8 +66,17 @@ def get_user_id(username):
             return user_info[0]
     return -1
 
-def get_password(username):
-    pass
+def authenticate_user(username, password):
+    open_db()
+
+    select = "SELECT username, password FROM users"
+    c.execute(select)
+    users = c.fetchall()
+
+    for user_info in users:
+        if user_info[0] == username and user_info[1] == password:
+            return True
+    return False
 
 # BLOG
 def add_blog(user_id, blog_title):
