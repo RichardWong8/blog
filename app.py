@@ -74,17 +74,20 @@ def create_blog_confirm():
         user_id = get_user_id(session["username"])
         blog_title = request.form["blog_title"]
         blog_id = add_blog(user_id, blog_title)
-        return redirect(url_for("view_blog", user_id=user_id, blog_id=blog_id))
+        return redirect(url_for("view_blog", user_id=user_id, blog_id=blog_id, blog_title=blog_title))
     return redirect(url_for("create_blog"))
 
 @app.route("/blog/view", methods=["GET"])
 def view_blog():
     user_id = request.args["user_id"]
     blog_id = request.args["blog_id"]
+    blog_title = request.args["blog_title"]
+    # should write a function to retrieve title from id, more secure or
+    # find a way to use POST request
 
     entries_list = get_entries(user_id, blog_id)
 
-    return render_template("view_blog.html")
+    return render_template("view_blog.html", blog_title=blog_title, entries_list=entries_list)
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(32)
