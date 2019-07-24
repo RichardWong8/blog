@@ -3,17 +3,13 @@
 {% block header %} MY BLOGS {% endblock %}
 
 {% block navigation %}
-  <nav>
-    <div class="nav-wrapper">
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="{{url_for('blog')}}"> HOME</a></li>
-        <li><a href="{{url_for('create_blog')}}">CREATE BLOG</a></li>
-      </ul>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-         <li><a href="{{url_for('logout')}}"> LOGOUT</a></li>
-      </ul>
-    </div>
-  </nav>
+  <ul id="nav-mobile" class="left hide-on-med-and-down">
+    <li><a href="{{url_for('blog')}}"> HOME</a></li>
+    <li><a href="{{url_for('create_blog')}}">CREATE BLOG</a></li>
+  </ul>
+  <ul id="nav-mobile" class="right hide-on-med-and-down">
+     <li><a href="{{url_for('logout')}}"> LOGOUT</a></li>
+  </ul>
 {% endblock %}
 
 {% block content %}

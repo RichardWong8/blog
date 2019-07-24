@@ -2,13 +2,9 @@
 {% block title %} Welcome! {% endblock %}
 
 {% block navigation %}
-<nav>
-  <div class="nav-wrapper">
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li><a class="brand-logo center my-header" href="{{url_for('blog')}}"> WELCOME TO THE BLOG! </a></li>
-    </ul>
-  </div>
-</nav>
+  <ul id="nav-mobile" class="left hide-on-med-and-down">
+    <li><a class="brand-logo center my-header" href="{{url_for('blog')}}"> WELCOME TO THE BLOG! </a></li>
+  </ul>
 {% endblock %}
 
 {% block content %}

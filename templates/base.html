@@ -7,10 +7,18 @@
     <link rel="stylesheet" href="/static/styles.css">
   </head>
   <body>
-    {% block navigation %}{% endblock %}
-    <div class="non-nav">
-      <span class="my-header card-title"> {% block header %}{% endblock %} </span><br>
-      {% block content %}{% endblock %}
+    <nav>
+      <div class="nav-wrapper">
+        <div class="container">
+          {% block navigation %}{% endblock %}
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="non-nav">
+        <span class="my-header card-title"> {% block header %}{% endblock %} </span><br>
+        {% block content %}{% endblock %}
+      </div>
     </div>
   </body>
 </html>
