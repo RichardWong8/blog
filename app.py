@@ -1,5 +1,5 @@
 from flask import Flask, flash, render_template, request, redirect, url_for, session
-from db import *
+from util.db import *
 import os
 
 app = Flask(__name__)
