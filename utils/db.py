@@ -117,16 +117,6 @@ def get_blog_title(user_id, blog_id):
 
     return blog
 
-def get_entries(user_id, blog_id):
-    open_db()
-
-    select = "SELECT user_id, blog_id, entry_id, entry_title, entry_content FROM entries WHERE user_id=" + str(user_id) + " AND blog_id =" + str(blog_id)
-    c.execute(select)
-    entries = c.fetchall()
-
-    return entries
-
-
 # ENTRY
 def add_entry(user_id, blog_id, entry_title, entry_content):
     open_db()
@@ -144,6 +134,15 @@ def add_entry(user_id, blog_id, entry_title, entry_content):
 def change_entry(user_id, blog_id, entry_id, entry_title, entry_content):
     open_db()
     save()
+
+def get_entries(user_id, blog_id):
+    open_db()
+
+    select = "SELECT user_id, blog_id, entry_id, entry_title, entry_content FROM entries WHERE user_id=" + str(user_id) + " AND blog_id =" + str(blog_id)
+    c.execute(select)
+    entries = c.fetchall()
+
+    return entries
 
 add_user("johnjacobsmith", "p")
 add_blog(0, "first blog ever")

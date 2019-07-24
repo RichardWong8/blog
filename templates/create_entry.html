@@ -3,7 +3,7 @@
 {% block header %} {{ blog_title }} {% endblock %}
 
 {% block content %}
-  <form method="post" action="/entry/create/confirm">
+  <form method="post" action="/create/entry/confirm">
     <input type="hidden" name="blog_id" value="{{blog_id}}"><br>
     <input type="text" name="entry_title" placeholder="entry title"><br>
     <input type="text" name="entry_content" placeholder="entry content"><br>

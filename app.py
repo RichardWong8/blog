@@ -66,13 +66,13 @@ def blog():
 
     return render_template("blog.html", blog_list=blog_list)
 
-@app.route("/blog/create", methods=["GET"])
+@app.route("/create/blog", methods=["GET"])
 def create_blog():
     if not("username" in session):
         return redirect(url_for("login"))
     return render_template("create_blog.html")
 
-@app.route("/blog/create/confirm", methods=["POST"])
+@app.route("/create/blog/confirm", methods=["POST"])
 def create_blog_confirm():
     if not("username" in session):
         return redirect(url_for("login"))
@@ -83,7 +83,7 @@ def create_blog_confirm():
         return redirect(url_for("view_blog", user_id=user_id, blog_id=blog_id))
     return redirect(url_for("create_blog"))
 
-@app.route("/blog/view", methods=["GET"])
+@app.route("/view/blog", methods=["GET", "POST"])
 def view_blog():
     if not("username" in session):
         return redirect(url_for("login"))
@@ -98,16 +98,29 @@ def view_blog():
 
     return render_template("view_blog.html", blog_title=blog_title, entries_list=entries_list)
 
-@app.route("/entry/create")
+@app.route("/create/entry", methods=["GET", "POST"])
 def create_entry():
-    if not(session["username"] and session["blog_id"]):
+    if not("username" in session and "blog_id" in session):
         return redirect(url_for("blog"))
     blog_id = session["blog_id"]
     blog_title = session["blog_title"]
     return render_template("create_entry.html", blog_id=blog_id, blog_title=blog_title)
 
-@app.route("/entry/create/confirm", methods=["POST"])
+@app.route("/create/entry/confirm", methods=["POST"])
 def create_entry_confirm():
+    if not("username" in session and "blog_id" in session):
+        return redirect(url_for("blog"))
+    if request.method == "POST":
+        user_id = get_user_id(session["username"])
+        blog_id = request.form["blog_id"]
+        entry_title = request.form["entry_title"]
+        entry_content = request.form["entry_content"]
+        entry_id = add_entry(user_id, blog_id, entry_title, entry_content)
+        return redirect(url_for("view_entry", user_id=user_id, blog_id=blog_id, entry_id=entry_id))
+    return redirect(url_for("create_entry"))
+
+@app.route("/view/entry", methods=["GET", "POST"])
+def view_entry():
     return ""
 
 if __name__ == "__main__":
