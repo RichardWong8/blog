@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 {% block title %} Welcome! {% endblock %}
-{% block header %} WELCOME TO THE BLOG! {% endblock %}
+
+{% block navigation %}
+<nav>
+  <div class="nav-wrapper">
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <li><a class="brand-logo center my-header" href="{{url_for('blog')}}"> WELCOME TO THE BLOG! </a></li>
+    </ul>
+  </div>
+</nav>
+{% endblock %}
+
 {% block content %}
-    <a href= "{{url_for('register')}}">REGISTER</a><br>
-    <a href= "{{url_for('login')}}">LOGIN</a>
+  <div class="center-align">
+    <a class="waves-effect waves-light btn home-buttons" href= "{{url_for('register')}}">REGISTER</a><br>
+    <a class="waves-effect waves-light btn home-buttons" href= "{{url_for('login')}}">LOGIN</a>
+  </div>
 {% endblock %}
