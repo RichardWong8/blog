@@ -1,5 +1,5 @@
 from flask import Flask, flash, render_template, request, redirect, url_for, session
-from util.db import *
+from utils.db import *
 import os
 
 app = Flask(__name__)
@@ -97,7 +97,7 @@ def view_blog():
     entries_list = get_entries(user_id, blog_id)
 
     return render_template("view_blog.html", blog_title=blog_title, entries_list=entries_list)
-    
+
 @app.route("/entry/create")
 def create_entry():
     if not(session["username"] and session["blog_id"]):
