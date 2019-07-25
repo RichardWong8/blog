@@ -15,8 +15,8 @@
       </div>
     </nav>
     <div class="container">
-      <div class="non-nav">
-        <span class="my-header card-title"> {% block header %}{% endblock %} </span><br>
+      <div class="below-nav">
+        {% if not no_title %}<span class="title-font card-title"> {% block header %}{% endblock %} </span><br> {% endif %}
         {% block content %}{% endblock %}
       </div>
     </div>

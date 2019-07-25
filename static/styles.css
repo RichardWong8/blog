@@ -1,16 +1,20 @@
-.non-nav {
-  margin: 15px !important
+/* MARGIN BETWEEN NAV */
+.below-nav{
+  margin: 15px !important;
 }
 
+/* HOME PAGE */
 .home-buttons {
-  margin: 10px !important
+  margin: 10px !important;
 }
 
-.my-header {
+/* TITLE OF PAGE */
+.title-font {
   font-size: 30px !important;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
 }
 
+/* EXISTING */
 .container {
   width: 80% !important;
 }

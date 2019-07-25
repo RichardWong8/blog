@@ -12,7 +12,7 @@ def home():
     if "username" in session:
         return redirect(url_for('blog'))
 
-    return render_template("home.html")
+    return render_template("home.html", no_title=True)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
